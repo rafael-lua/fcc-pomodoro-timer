@@ -1,10 +1,13 @@
-
+import { Provider } from "react-redux";
+import store from "./store/config";
 
 function App() {
   return (
-    <div>
-      
-    </div>
+    <Provider store={store}>
+      <div>
+        <h1>Pomodoro Timer</h1>
+      </div>
+    </Provider>
   );
 }
 

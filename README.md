@@ -3,4 +3,4 @@ This is a 25+5 Clock (Pomodoro) project made for the Front End Development Libra
 
 Made with: React and Redux
 
-*Currently being deployed at [Netlify]()*
+*Currently being deployed at [Netlify](https://competent-pare-f68933.netlify.app/)*
