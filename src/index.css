@@ -73,14 +73,34 @@ p {
 }
 
 .options {
-  padding: 1em;
+  padding: 0.5em;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 3px solid rgba(0, 0, 0, 0.5);
   border-radius: 1em;
   margin: 0 1em;
   background-color: #fff1e6;
+}
+
+.options-text {
+  font-size: 1.25em;
+  font-weight: 700;
+  text-align: center;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+  margin-bottom: 0.5em;
+}
+
+.options-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.options-value-text {
+  font-weight: 700;
+  font-size: 1.5em;
 }
 
 .display {
