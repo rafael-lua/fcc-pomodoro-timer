@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { debugMsg } from '../store/actions';
+import { debugMsg, increaseSession, increaseBreak, decreaseBreak, decreaseSession } from '../store/actions';
 import { FaArrowCircleUp, FaArrowCircleDown } from 'react-icons/fa';
 
 function Options(props) {
@@ -8,19 +8,18 @@ function Options(props) {
       <div className="options">
         <p className="options-text">Break</p>
         <div className="options-value">
-          <div className="icon"><FaArrowCircleUp size="2em" /></div>
+          <div className="icon noselect" onClick={() => props.increaseBreak()}><FaArrowCircleUp size="2em" /></div>
           <p className="options-value-text">{props.breakLength}</p>
-          <div className="icon"><FaArrowCircleDown size="2em" /></div>
+          <div className="icon noselect" onClick={() => props.decreaseBreak()}><FaArrowCircleDown size="2em" /></div>
         </div>
       </div>
       <div className="options">
         <p className="options-text">Session</p>
         <div className="options-value">
-          <div className="icon"><FaArrowCircleUp size="2em" /></div>
+          <div className="icon noselect" onClick={() => props.increaseSession()}><FaArrowCircleUp size="2em" /></div>
           <p className="options-value-text">{props.sessionLength}</p>
-          <div className="icon"><FaArrowCircleDown size="2em" /></div>
+          <div className="icon noselect" onClick={() => props.decreaseSession()}><FaArrowCircleDown size="2em" /></div>
         </div>
-        
       </div>
     </div>
   )
@@ -33,7 +32,11 @@ const mapStateToProps = (state) => {
 
 // Mapping dispatchs actions to the component props (https://react-redux.js.org/using-react-redux/connect-mapdispatch#defining-mapdispatchtoprops-as-an-object)
 const mapDispatchToProps = {
-  debugMsg
+  debugMsg,
+  increaseSession,
+  increaseBreak,
+  decreaseBreak,
+  decreaseSession,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Options);

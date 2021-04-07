@@ -48,6 +48,15 @@ p {
   align-content: center;
 }
 
+.noselect {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+     -khtml-user-select: none;
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; 
+}
+
 /* App styles */
 
 .title {
@@ -113,6 +122,18 @@ p {
   border: 5px solid rgba(0, 0, 0, 0.25);
   border-radius: 2em;
   background-color: #fff1e6;
+}
+
+.display-mode {
+  font-size: 1.25em;
+  font-weight: 700;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+  margin-bottom: 0.5em;
+}
+
+.display-value {
+  font-size: 1.5em;
+  font-weight: 700;
 }
 
 .controls {
