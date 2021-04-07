@@ -1,7 +1,15 @@
+import _ from "lodash";
 import actions from "./actions"
 
 // State initial values
-const appState = {};
+const appState = {
+  sessionLength: 25,
+  breakLength: 5,
+  currentSession: {min: 25, sec: 0},
+  currentLength: {min: 5, sec: 0},
+  currentMode: "session",
+  isActive: false,
+};
 
 const reducer = (state = appState, action) => {
   switch(action.type) {

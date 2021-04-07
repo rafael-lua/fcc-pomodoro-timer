@@ -1,9 +1,17 @@
-function Display() {
+import { connect } from "react-redux";
+
+function Display(props) {
   return (
-    <div>
-      Display
+    <div className="display">
+      <p>Mode</p>
+      <p>Value</p>
     </div>
   )
 }
 
-export default Display
+// Mapping the state to the component props
+const mapStateToProps = (state) => {
+  return state;
+}
+
+export default connect(mapStateToProps, null)(Display);

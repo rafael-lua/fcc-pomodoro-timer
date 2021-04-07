@@ -8,12 +8,12 @@ import Display from "./components/Display";
 function App() {
   return (
     <Provider store={store}>
-      <div class="container">
+      <div className="container">
         <h1 className="title">Pomodoro Timer</h1>
         <Options />
         <Display />
         <Controls />
-        <h3>Made by <a href="https://github.com/rafael-lua">Rafael-Lua</a></h3>
+        <h3 className="copy">Made by <a href="https://github.com/rafael-lua">Rafael-Lua</a></h3>
       </div>
     </Provider>
   );
