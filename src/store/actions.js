@@ -17,7 +17,8 @@ export const debugMsg = (msg) => {
   }
 };
 
-// Debug testing function to log something to the console
+
+// App actions
 export const changeMode = () => {
   return {
     type: actions.CHANGE_MODE
@@ -27,7 +28,7 @@ export const changeMode = () => {
 
 export const reset = () => {
   return {
-    type: actions.CHANGE_MODE
+    type: actions.RESET
   }
 };
 

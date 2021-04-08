@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { debugMsg, changeMode } from '../store/actions';
+import { debugMsg, changeMode, reset } from '../store/actions';
 import { FaPlay, FaPause, FaSyncAlt } from 'react-icons/fa';
 
 function Controls(props) {
@@ -12,7 +12,7 @@ function Controls(props) {
         <FaPause size="1.5em" style={{margin: "0 0.5em"}} /> 
       }
       </div>
-      <div className="icon"><FaSyncAlt size="1.5em" style={{margin: "0 0.5em"}} /></div>
+      <div className="icon" onClick={() => props.reset()}><FaSyncAlt size="1.5em" style={{margin: "0 0.5em"}} /></div>
     </div>
   )
 }
@@ -26,7 +26,8 @@ const mapStateToProps = (state) => {
 // Mapping dispatchs actions to the component props (https://react-redux.js.org/using-react-redux/connect-mapdispatch#defining-mapdispatchtoprops-as-an-object)
 const mapDispatchToProps = {
   debugMsg,
-  changeMode
+  changeMode,
+  reset
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Controls);

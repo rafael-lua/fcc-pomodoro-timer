@@ -24,6 +24,17 @@ const reducer = (state = appState, action) => {
       return newState;
     }
 
+    case actions.RESET: {
+      let newState = _.cloneDeep(state);
+      newState.sessionLength = 25;
+      newState.breakLength = 5;
+      newState.currentSession = {min: 25, sec: 0};
+      newState.currentBreak = {min: 5, sec: 0};
+      newState.currentMode = "session";
+      newState.isActive = false;
+      return newState;
+    }
+
     case actions.INCREASE_SESSION: {
       let newState = _.cloneDeep(state);
       if(newState.sessionLength < 60) { newState.sessionLength++; }
@@ -32,7 +43,7 @@ const reducer = (state = appState, action) => {
 
     case actions.DECREASE_SESSION: {
       let newState = _.cloneDeep(state);
-      if(newState.sessionLength > 0) { newState.sessionLength--; }
+      if(newState.sessionLength > 1) { newState.sessionLength--; }
       return newState;
     }
 
@@ -44,7 +55,7 @@ const reducer = (state = appState, action) => {
 
     case actions.DECREASE_BREAK: {
       let newState = _.cloneDeep(state);
-      if(newState.breakLength > 0) { newState.breakLength--; }
+      if(newState.breakLength > 1) { newState.breakLength--; }
       return newState;
     }
 
