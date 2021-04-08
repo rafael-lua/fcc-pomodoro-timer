@@ -9,7 +9,6 @@ const appState = {
   currentBreak: {min: 5, sec: 0},
   currentMode: "session",
   isActive: false,
-  currentTick: 0,
   playBeep: "stop"
 };
 
@@ -22,44 +21,37 @@ const reducer = (state = appState, action) => {
 
     case actions.UPDATE_TIMER: {
       let newState = _.cloneDeep(state);
-      if(newState.currentTick === 1000) {
-        newState.currentTick = 0;
-        if(newState.currentMode === "session") {
+    
+      if(newState.currentMode === "session") {
 
-          if(newState.currentSession.sec > 0) {
-            newState.currentSession.sec--;
-          } else if(newState.currentSession.min > 0) {
-            newState.currentSession.min--;
-            newState.currentSession.sec = 59;
-          }
-
-          if(newState.currentSession.sec === 0 && newState.currentSession.min === 0) {
-            // Change to break, reset session.
-            newState.currentMode = "break";
-            newState.currentSession.sec = 0;
-            newState.currentSession.min = newState.sessionLength;
-            newState.playBeep = "play";
-          }
-        } else {
-
-          if(newState.currentBreak.sec > 0) {
-            newState.currentBreak.sec--;
-          } else if(newState.currentBreak.min > 0) {
-            newState.currentBreak.min--;
-            newState.currentBreak.sec = 59;
-          }
-
-          if(newState.currentBreak.sec === 0 && newState.currentBreak.min === 0) {
-            // Change to session, reset break.
-            newState.currentMode = "session";
-            newState.currentBreak.sec = 0;
-            newState.currentBreak.min = newState.breakLength;
-            newState.playBeep = "play";
-          }
+        if(newState.currentSession.sec > 0) {
+          newState.currentSession.sec--;
+        } else if(newState.currentSession.min > 0) {
+          newState.currentSession.min--;
+          newState.currentSession.sec = 59;
+        } else if(newState.currentSession.sec === 0 && newState.currentSession.min === 0) {
+          // Change to break, reset session.
+          newState.currentMode = "break";
+          newState.currentSession.sec = 0;
+          newState.currentSession.min = newState.sessionLength;
+          newState.playBeep = "play";
         }
       } else {
-        newState.currentTick += 10;
+
+        if(newState.currentBreak.sec > 0) {
+          newState.currentBreak.sec--;
+        } else if(newState.currentBreak.min > 0) {
+          newState.currentBreak.min--;
+          newState.currentBreak.sec = 59;
+        } else if(newState.currentBreak.sec === 0 && newState.currentBreak.min === 0) {
+          // Change to session, reset break.
+          newState.currentMode = "session";
+          newState.currentBreak.sec = 0;
+          newState.currentBreak.min = newState.breakLength;
+          newState.playBeep = "play";
+        }
       }
+      
       return newState;
     }
 
@@ -83,7 +75,6 @@ const reducer = (state = appState, action) => {
       newState.currentBreak = {min: 5, sec: 0};
       newState.currentMode = "session";
       newState.isActive = false;
-      newState.currentTick = 0;
       newState.playBeep = "reset";
       return newState;
     }

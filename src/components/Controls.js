@@ -11,7 +11,7 @@ function Controls(props) {
   useEffect(() => {
     if(props.isActive === true && timer === null) {
       setTimer(window.setInterval(
-        props.updateTimer, 10
+        props.updateTimer, 1000
       ));
     } else if(props.isActive === false && timer !== null) {
       window.clearInterval(timer);
@@ -36,7 +36,7 @@ function Controls(props) {
 
   return (
     <div className="controls noselect">
-      <div id="start-stop" className="icon" onClick={() => {props.changeMode();}}>
+      <div id="start_stop" className="icon" onClick={() => {props.changeMode();}}>
       {
         props.isActive === false ? 
         <FaPlay size="1.5em" style={{margin: "0 0.5em"}} className="react-icons" /> :

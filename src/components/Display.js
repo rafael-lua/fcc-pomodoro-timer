@@ -12,8 +12,8 @@ function Display(props) {
       <p id="time-left" className="display-value">
         {
           props.currentMode === "session" ? 
-          (formatZero(props.currentSession.min) + " : " + formatZero(props.currentSession.sec)) :
-          (formatZero(props.currentBreak.min) + " : " + formatZero(props.currentBreak.sec))
+          (formatZero(props.currentSession.min) + ":" + formatZero(props.currentSession.sec)) :
+          (formatZero(props.currentBreak.min) + ":" + formatZero(props.currentBreak.sec))
         }
       </p>
     </div>
