@@ -10,7 +10,7 @@ const appState = {
   currentMode: "session",
   isActive: false,
   currentTick: 0,
-  playBeep: false
+  playBeep: "stop"
 };
 
 const reducer = (state = appState, action) => {
@@ -38,7 +38,7 @@ const reducer = (state = appState, action) => {
             newState.currentMode = "break";
             newState.currentSession.sec = 0;
             newState.currentSession.min = newState.sessionLength;
-            newState.playBeep = true;
+            newState.playBeep = "play";
           }
         } else {
 
@@ -54,7 +54,7 @@ const reducer = (state = appState, action) => {
             newState.currentMode = "session";
             newState.currentBreak.sec = 0;
             newState.currentBreak.min = newState.breakLength;
-            newState.playBeep = true;
+            newState.playBeep = "play";
           }
         }
       } else {
@@ -65,7 +65,7 @@ const reducer = (state = appState, action) => {
 
     case actions.RESET_BEEP: {
       let newState = _.cloneDeep(state);
-      newState.playBeep = false;
+      newState.playBeep = "stop";
       return newState;
     }
 
@@ -83,6 +83,8 @@ const reducer = (state = appState, action) => {
       newState.currentBreak = {min: 5, sec: 0};
       newState.currentMode = "session";
       newState.isActive = false;
+      newState.currentTick = 0;
+      newState.playBeep = "reset";
       return newState;
     }
 

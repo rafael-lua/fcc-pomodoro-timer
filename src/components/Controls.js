@@ -20,25 +20,30 @@ function Controls(props) {
   }, [props, timer]);
 
   useEffect(() => {
-    if(props.playBeep === true) {
+    if(props.playBeep === "play") {
 
       const audioContext = document.getElementById("beep");
       audioContext.play();      
 
+      props.resetBeep();
+    } else if(props.playBeep === "reset") {
+      const audioContext = document.getElementById("beep");
+      audioContext.pause();
+      audioContext.currentTime = 0;
       props.resetBeep();
     }
   }, [props]);
 
   return (
     <div className="controls noselect">
-      <div className="icon" onClick={() => {props.changeMode();}}>
+      <div id="start-stop" className="icon" onClick={() => {props.changeMode();}}>
       {
         props.isActive === false ? 
-        <FaPlay size="1.5em" style={{margin: "0 0.5em"}} /> :
-        <FaPause size="1.5em" style={{margin: "0 0.5em"}} /> 
+        <FaPlay size="1.5em" style={{margin: "0 0.5em"}} className="react-icons" /> :
+        <FaPause size="1.5em" style={{margin: "0 0.5em"}} className="react-icons" /> 
       }
       </div>
-      <div className="icon" onClick={() => props.reset()}><FaSyncAlt size="1.5em" style={{margin: "0 0.5em"}} /></div>
+      <div id="reset" className="icon" onClick={() => props.reset()}><FaSyncAlt size="1.5em" style={{margin: "0 0.5em"}} className="react-icons" /></div>
       <audio className="clip" id="beep" src={beep} type="audio/mp3">
         Your browser does not support the
         <code>audio</code> element.

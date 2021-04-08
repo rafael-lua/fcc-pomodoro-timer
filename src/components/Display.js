@@ -8,8 +8,8 @@ function Display(props) {
 
   return (
     <div className="display">
-      <p className="display-mode">{props.currentMode === "session" ? "SESSION" : "BREAK"}</p>
-      <p className="display-value">
+      <p id="timer-label" className="display-mode">{props.currentMode === "session" ? "SESSION" : "BREAK"}</p>
+      <p id="time-left" className="display-value">
         {
           props.currentMode === "session" ? 
           (formatZero(props.currentSession.min) + " : " + formatZero(props.currentSession.sec)) :
