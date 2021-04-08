@@ -8,6 +8,7 @@ const actions = {
   DECREASE_BREAK: "DECREASE_BREAK",
   RESET: "RESET",
   UPDATE_TIMER: "UPDATE_TIMER",
+  RESET_BEEP: "RESET_BEEP",
 };
 
 // Debug testing function to log something to the console
@@ -23,6 +24,13 @@ export const debugMsg = (msg) => {
 export const updateTimer = () => {
   return {
     type: actions.UPDATE_TIMER
+  }
+};
+
+
+export const resetBeep = () => {
+  return {
+    type: actions.RESET_BEEP
   }
 };
 

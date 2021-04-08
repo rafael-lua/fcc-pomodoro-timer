@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { debugMsg, changeMode, reset, updateTimer } from '../store/actions';
+import { debugMsg, changeMode, reset, updateTimer, resetBeep } from '../store/actions';
 import { FaPlay, FaPause, FaSyncAlt } from 'react-icons/fa';
+import beep from "../audio/short-alarm-clock-sound.mp3";
 
 function Controls(props) {
 
@@ -18,6 +19,16 @@ function Controls(props) {
     }
   }, [props, timer]);
 
+  useEffect(() => {
+    if(props.playBeep === true) {
+
+      const audioContext = document.getElementById("beep");
+      audioContext.play();      
+
+      props.resetBeep();
+    }
+  }, [props]);
+
   return (
     <div className="controls noselect">
       <div className="icon" onClick={() => {props.changeMode();}}>
@@ -28,6 +39,10 @@ function Controls(props) {
       }
       </div>
       <div className="icon" onClick={() => props.reset()}><FaSyncAlt size="1.5em" style={{margin: "0 0.5em"}} /></div>
+      <audio className="clip" id="beep" src={beep} type="audio/mp3">
+        Your browser does not support the
+        <code>audio</code> element.
+      </audio>
     </div>
   )
 }
@@ -43,7 +58,8 @@ const mapDispatchToProps = {
   debugMsg,
   changeMode,
   reset,
-  updateTimer
+  updateTimer,
+  resetBeep
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Controls);

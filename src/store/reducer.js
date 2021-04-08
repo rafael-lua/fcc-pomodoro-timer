@@ -10,6 +10,7 @@ const appState = {
   currentMode: "session",
   isActive: false,
   currentTick: 0,
+  playBeep: false
 };
 
 const reducer = (state = appState, action) => {
@@ -37,6 +38,7 @@ const reducer = (state = appState, action) => {
             newState.currentMode = "break";
             newState.currentSession.sec = 0;
             newState.currentSession.min = newState.sessionLength;
+            newState.playBeep = true;
           }
         } else {
 
@@ -52,11 +54,18 @@ const reducer = (state = appState, action) => {
             newState.currentMode = "session";
             newState.currentBreak.sec = 0;
             newState.currentBreak.min = newState.breakLength;
+            newState.playBeep = true;
           }
         }
       } else {
         newState.currentTick += 10;
       }
+      return newState;
+    }
+
+    case actions.RESET_BEEP: {
+      let newState = _.cloneDeep(state);
+      newState.playBeep = false;
       return newState;
     }
 
