@@ -7,6 +7,7 @@ const actions = {
   DECREASE_SESSION: "DECREASE_SESSION",
   DECREASE_BREAK: "DECREASE_BREAK",
   RESET: "RESET",
+  UPDATE_TIMER: "UPDATE_TIMER",
 };
 
 // Debug testing function to log something to the console
@@ -19,6 +20,13 @@ export const debugMsg = (msg) => {
 
 
 // App actions
+export const updateTimer = () => {
+  return {
+    type: actions.UPDATE_TIMER
+  }
+};
+
+
 export const changeMode = () => {
   return {
     type: actions.CHANGE_MODE

@@ -9,6 +9,7 @@ const appState = {
   currentBreak: {min: 5, sec: 0},
   currentMode: "session",
   isActive: false,
+  currentTick: 0,
 };
 
 const reducer = (state = appState, action) => {
@@ -17,6 +18,47 @@ const reducer = (state = appState, action) => {
     case actions.DEBUG:
       console.log("ACTION SENT. MESSAGE: " + action.msg);
       return state;
+
+    case actions.UPDATE_TIMER: {
+      let newState = _.cloneDeep(state);
+      if(newState.currentTick === 1000) {
+        newState.currentTick = 0;
+        if(newState.currentMode === "session") {
+
+          if(newState.currentSession.sec > 0) {
+            newState.currentSession.sec--;
+          } else if(newState.currentSession.min > 0) {
+            newState.currentSession.min--;
+            newState.currentSession.sec = 59;
+          }
+
+          if(newState.currentSession.sec === 0 && newState.currentSession.min === 0) {
+            // Change to break, reset session.
+            newState.currentMode = "break";
+            newState.currentSession.sec = 0;
+            newState.currentSession.min = newState.sessionLength;
+          }
+        } else {
+
+          if(newState.currentBreak.sec > 0) {
+            newState.currentBreak.sec--;
+          } else if(newState.currentBreak.min > 0) {
+            newState.currentBreak.min--;
+            newState.currentBreak.sec = 59;
+          }
+
+          if(newState.currentBreak.sec === 0 && newState.currentBreak.min === 0) {
+            // Change to session, reset break.
+            newState.currentMode = "session";
+            newState.currentBreak.sec = 0;
+            newState.currentBreak.min = newState.breakLength;
+          }
+        }
+      } else {
+        newState.currentTick += 10;
+      }
+      return newState;
+    }
 
     case actions.CHANGE_MODE: {
       let newState = _.cloneDeep(state);
@@ -38,24 +80,28 @@ const reducer = (state = appState, action) => {
     case actions.INCREASE_SESSION: {
       let newState = _.cloneDeep(state);
       if(newState.sessionLength < 60) { newState.sessionLength++; }
+      newState.currentSession.min = newState.sessionLength;
       return newState;
     }
 
     case actions.DECREASE_SESSION: {
       let newState = _.cloneDeep(state);
       if(newState.sessionLength > 1) { newState.sessionLength--; }
+      newState.currentSession.min = newState.sessionLength;
       return newState;
     }
 
     case actions.INCREASE_BREAK: {
       let newState = _.cloneDeep(state);
       if(newState.breakLength < 60) { newState.breakLength++; }
+      newState.currentBreak.min = newState.breakLength;
       return newState;
     }
 
     case actions.DECREASE_BREAK: {
       let newState = _.cloneDeep(state);
       if(newState.breakLength > 1) { newState.breakLength--; }
+      newState.currentBreak.min = newState.breakLength;
       return newState;
     }
 
